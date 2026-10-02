@@ -231,7 +231,7 @@ ingestion; validation of all inputs; health and readiness endpoints.
   document contains an injection attempt that never reaches the model.
 - **Data protection**: PII redacted from logs; API keys held only as hashes; provider keys only via environment.
 - **Not implemented** (reference scope): OIDC authentication, ACL synchronisation from source systems, rate limiting
-  — see [enterprise-saas-plateform](https://github.com/shivkumarsinghsky/enterprise-saas-plateform) for those
+  — see [enterprise-saas-platform](https://github.com/shivkumarsinghsky/enterprise-saas-platform) for those
   patterns.
 
 ## Observability
@@ -253,9 +253,9 @@ Not implemented yet:
 
 ## Related Projects
 
-- [Enterprise AI Agent Platform](https://github.com/shivkumarsinghsky/enterprise-ai-agent-plateform) — agents that use this kind of retrieval as a tool
+- [Enterprise AI Agent Platform](https://github.com/shivkumarsinghsky/enterprise-ai-agent-platform) — agents that use this kind of retrieval as a tool
 - [System Design Architecture](https://github.com/shivkumarsinghsky/system-design-architecture) — [Enterprise AI Platform design](https://github.com/shivkumarsinghsky/system-design-architecture/blob/main/docs/designs/12-enterprise-ai-platform.md)
-- [Enterprise SaaS Platform](https://github.com/shivkumarsinghsky/enterprise-saas-plateform) — tenant isolation and RBAC
+- [Enterprise SaaS Platform](https://github.com/shivkumarsinghsky/enterprise-saas-platform) — tenant isolation and RBAC
 - [EAM Platform Architecture](https://github.com/shivkumarsinghsky/eam-platform-architecture) — the maintenance domain used in the sample corpus
 
 ## Author

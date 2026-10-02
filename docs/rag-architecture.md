@@ -93,7 +93,7 @@ Principles:
    RAG.
 4. **Separate conversation memory per (tenant, user).**
 5. For stronger isolation, use a separate index/collection or database per tenant (same trade-offs as in
-   [enterprise-saas-plateform](https://github.com/shivkumarsinghsky/enterprise-saas-plateform)).
+   [enterprise-saas-platform](https://github.com/shivkumarsinghsky/enterprise-saas-platform)).
 
 ## Prompt construction
 
