@@ -1,0 +1,10 @@
+{"question": "How often is the P-101 quarterly inspection performed?", "tenant": "acme", "groups": ["maintenance"], "expected_documents": ["pump-p101-manual"], "must_include": ["90 days"]}
+{"question": "What is the vibration limit before P-101 must be switched to the standby pump?", "tenant": "acme", "groups": ["maintenance"], "expected_documents": ["pump-p101-manual"], "must_include": ["7.1 mm/s"]}
+{"question": "Which seal kit part number is needed for the P-101 mechanical seal?", "tenant": "acme", "groups": ["maintenance"], "expected_documents": ["pump-p101-manual"], "must_include": ["SEAL-KIT-40"]}
+{"question": "Who may remove a lock applied during lock-out tag-out?", "tenant": "acme", "groups": ["all-staff"], "expected_documents": ["lockout-tagout-procedure"], "must_include": ["person who applied them"]}
+{"question": "What is the daily meal allowance when travelling?", "tenant": "acme", "groups": ["all-staff"], "expected_documents": ["travel-expense-policy"], "must_include": ["45 EUR"]}
+{"question": "What is the hotel limit per night in high-cost cities?", "tenant": "acme", "groups": ["all-staff"], "expected_documents": ["travel-expense-policy"], "must_include": ["220 EUR"]}
+{"question": "What is the executive bonus pool for 2026?", "tenant": "acme", "groups": ["all-staff"], "answerable": false}
+{"question": "How often does Globex inspect feed pumps?", "tenant": "acme", "groups": ["maintenance"], "answerable": false}
+{"question": "How often does Globex inspect feed pumps?", "tenant": "globex", "groups": [], "expected_documents": ["pump-maintenance-standard"], "must_include": ["30 days"]}
+{"question": "What is the capital of France?", "tenant": "acme", "groups": ["all-staff"], "answerable": false}

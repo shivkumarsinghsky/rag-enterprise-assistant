@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rag-enterprise-assistant"
+version = "1.0.0"
+description = "Enterprise Retrieval-Augmented Generation (RAG) reference implementation: ingestion, chunking, embeddings, hybrid retrieval with metadata/ACL filtering, grounded answers with citations, evaluation"
+authors = [{ name = "Shiv Kumar" }]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "fastapi>=0.110",
+  "uvicorn[standard]>=0.29",
+  "pydantic>=2.6",
+  "pydantic-settings>=2.2",
+  "httpx>=0.27",
+  "numpy>=1.26",
+  "prometheus-client>=0.20",
+]
+
+[project.optional-dependencies]
+pgvector = ["psycopg[binary]>=3.1"]
+dev = ["pytest>=8", "pytest-asyncio>=0.23", "ruff>=0.5", "mypy>=1.10", "psycopg[binary]>=3.1"]
+
+[project.scripts]
+rag-assistant = "rag_assistant.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+extend-exclude = ["*.md"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+ignore = ["SIM905"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["rag_assistant"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+files = ["src"]
+ignore_missing_imports = true

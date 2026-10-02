@@ -1,0 +1,54 @@
+# Local environment: PostgreSQL + pgvector and the API (offline providers by default).
+#   docker compose up -d --build
+# Use local models with Ollama:  docker compose --profile ollama up -d
+#   then set EMBEDDING_PROVIDER=openai, LLM_PROVIDER=openai, OPENAI_BASE_URL=http://ollama:11434/v1,
+#   EMBEDDING_MODEL=nomic-embed-text, EMBEDDING_DIMENSIONS=768, LLM_MODEL=llama3.1 (after `ollama pull`).
+# Credentials are local development values only.
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: rag
+      POSTGRES_PASSWORD: rag-local-dev
+      POSTGRES_DB: rag
+    ports: ["${POSTGRES_PORT:-5432}:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rag"]
+      interval: 5s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    environment:
+      VECTOR_STORE: pgvector
+      DATABASE_URL: postgresql://rag:rag-local-dev@postgres:5432/rag
+      EMBEDDING_PROVIDER: ${EMBEDDING_PROVIDER:-hashing}
+      LLM_PROVIDER: ${LLM_PROVIDER:-extractive}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL:-https://api.openai.com/v1}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-text-embedding-3-small}
+      EMBEDDING_DIMENSIONS: ${EMBEDDING_DIMENSIONS:-384}
+      LLM_MODEL: ${LLM_MODEL:-gpt-4o-mini}
+      API_KEYS: '{"dev-acme-maintenance": {"tenant": "acme", "user": "alice", "groups": ["all-staff", "maintenance"]}, "dev-acme-staff-01": {"tenant": "acme", "user": "bob", "groups": ["all-staff"]}, "dev-globex-user-1": {"tenant": "globex", "user": "gina", "groups": []}}'
+    ports: ["${API_PORT:-8000}:8000"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health/ready')"]
+      interval: 10s
+      retries: 5
+
+  ollama:
+    profiles: ["ollama"]
+    image: ollama/ollama:latest
+    ports: ["${OLLAMA_PORT:-11434}:11434"]
+    volumes: [ollama:/root/.ollama]
+
+volumes:
+  pgdata:
+  ollama:
